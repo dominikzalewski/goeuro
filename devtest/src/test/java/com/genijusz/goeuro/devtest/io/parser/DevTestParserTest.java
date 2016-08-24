@@ -37,7 +37,7 @@ public class DevTestParserTest {
 				+ "\"latitude\": 52.52437, \"longitude\": 13.41053 }}]";
 
 		// when
-		List<DevTestRow> result = extractor.extract(jsonString);
+		List<DevTestRow> result = extractor.parse(jsonString);
 
 		// then
 		assertThat(result).hasSize(1);
@@ -52,7 +52,7 @@ public class DevTestParserTest {
 		String jsonString = "[]";
 
 		// when
-		List<DevTestRow> result = extractor.extract(jsonString);
+		List<DevTestRow> result = extractor.parse(jsonString);
 
 		// then
 		assertThat(result).isEmpty();
@@ -65,7 +65,7 @@ public class DevTestParserTest {
 				+ "{\"_id\": 425332,\"name\": \"Berlingerode\" , \"type\": \"location\",\"geo_position\": {\"latitude\": 51.45775, \"longitude\": 10.2384 }}]";
 
 		// when
-		List<DevTestRow> result = extractor.extract(jsonString);
+		List<DevTestRow> result = extractor.parse(jsonString);
 
 		// then
 		assertThat(result).hasSize(2);
@@ -81,7 +81,7 @@ public class DevTestParserTest {
 		String jsonString = "[{\"_id\": 4325}]";
 
 		// when
-		List<DevTestRow> result = extractor.extract(jsonString);
+		extractor.parse(jsonString);
 	}
 
 	@Test

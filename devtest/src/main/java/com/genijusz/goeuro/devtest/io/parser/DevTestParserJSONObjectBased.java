@@ -11,7 +11,7 @@ import com.genijusz.goeuro.devtest.dto.DevTestRow;
 
 public class DevTestParserJSONObjectBased implements DevTestParser {
 
-	public List<DevTestRow> extract(String json) {
+	public List<DevTestRow> parse(String json) {
 		try {
 			JSONArray inArray = new JSONArray(json);
 			ArrayList<DevTestRow> result = new ArrayList<>();
