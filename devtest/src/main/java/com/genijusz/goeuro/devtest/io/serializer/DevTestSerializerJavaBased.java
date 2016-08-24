@@ -8,6 +8,8 @@ import com.genijusz.goeuro.devtest.dto.DevTestRow;
 
 public class DevTestSerializerJavaBased implements DevTestSerializer {
 
+	private static final String NEW_LINE = System.getProperty("line.separator");
+
 	@Override
 	public void serialize(List<DevTestRow> rows, Writer writer) throws IOException {
 		for (DevTestRow row : rows) {
@@ -20,7 +22,7 @@ public class DevTestSerializerJavaBased implements DevTestSerializer {
 			writer.write(String.valueOf(row.getLatitude()));
 			writer.write(',');
 			writer.write(String.valueOf(row.getLongitude()));
-			writer.write("\n");
+			writer.write(NEW_LINE);
 		}
 	}
 
