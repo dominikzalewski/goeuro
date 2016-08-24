@@ -6,6 +6,6 @@ import org.json.JSONArray;
 
 public interface DevTestExtractor {
 	
-	List<DevTestRow> extract(JSONArray inArray);
+	List<DevTestRow> extract(String json);
 
 }

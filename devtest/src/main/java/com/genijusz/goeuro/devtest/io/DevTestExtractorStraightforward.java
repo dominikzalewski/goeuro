@@ -8,7 +8,8 @@ import org.json.JSONObject;
 
 public class DevTestExtractorStraightforward implements DevTestExtractor {
 
-	public List<DevTestRow> extract(JSONArray inArray) {
+	public List<DevTestRow> extract(String json) {
+		JSONArray inArray = new JSONArray(json);
 		ArrayList<DevTestRow> result = new ArrayList<>();
 		for (Object o : inArray) {
 			if (o instanceof JSONObject) {
