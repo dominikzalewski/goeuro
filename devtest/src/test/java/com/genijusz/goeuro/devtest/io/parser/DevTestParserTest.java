@@ -1,4 +1,4 @@
-package com.genijusz.goeuro.devtest;
+package com.genijusz.goeuro.devtest.io.parser;
 
 import static java.lang.Math.abs;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -8,23 +8,27 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import com.carlosbecker.guice.GuiceModules;
 import com.carlosbecker.guice.GuiceTestRunner;
-import com.genijusz.goeuro.devtest.io.DevTestExtractor;
-import com.genijusz.goeuro.devtest.io.DevTestIOModule;
-import com.genijusz.goeuro.devtest.io.DevTestRow;
+import com.genijusz.goeuro.devtest.dto.DevTestRow;
 
 @RunWith(GuiceTestRunner.class)
-@GuiceModules(DevTestIOModule.class)
-public class DevTestExtractorTest {
+@GuiceModules(DevTestParserModule.class)
+public class DevTestParserTest {
 
 	private static final double EPS = .00001;
 
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
+
 	@Inject
-	private DevTestExtractor extractor;
+	private DevTestParser extractor;
 
 	@Test
 	public void shouldParseSingleRowJson() {
@@ -70,9 +74,20 @@ public class DevTestExtractorTest {
 		verifyGeolocation(result.get(0), 52.52437, 13.41053);
 		verifyGeolocation(result.get(1), 51.45775, 10.2384);
 	}
-	
-	private void shouldHandleUTF8Chars() {
-		//TODO
+
+	@Test(expected = DevTestParseException.class)
+	public void shouldThrowOnIncompleteInput() {
+		// given
+		String jsonString = "[{\"_id\": 4325}]";
+
+		// when
+		List<DevTestRow> result = extractor.extract(jsonString);
+	}
+
+	@Test
+	@Ignore
+	public void shouldHandleUTF8Chars() {
+		// TODO
 	}
 
 	private void verifyGeolocation(DevTestRow actual, double expectedLatitude, double expectedLongitude) {

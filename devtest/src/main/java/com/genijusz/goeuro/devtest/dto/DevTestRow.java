@@ -1,4 +1,4 @@
-package com.genijusz.goeuro.devtest.io;
+package com.genijusz.goeuro.devtest.dto;
 
 public class DevTestRow {
 
