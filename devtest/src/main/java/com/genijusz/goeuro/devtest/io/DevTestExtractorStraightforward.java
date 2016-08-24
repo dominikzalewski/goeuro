@@ -13,8 +13,11 @@ public class DevTestExtractorStraightforward implements DevTestExtractor {
 		for (Object o : inArray) {
 			if (o instanceof JSONObject) {
 				JSONObject jObject = (JSONObject) o;
-				result.add(DevTestRow.builder().withId(1).withName("").withType("").withLatitude(2.0).withLongitude(2.0)
-						.build());
+				JSONObject geolocation = jObject.getJSONObject("geo_position");
+
+				result.add(DevTestRow.builder().withId(jObject.getLong("_id")).withName(jObject.getString("name"))
+						.withType(jObject.getString("type")).withLatitude(geolocation.getDouble("latitude"))
+						.withLongitude(geolocation.getDouble("longitude")).build());
 			}
 		}
 		return result;
